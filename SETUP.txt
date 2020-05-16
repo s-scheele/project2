@@ -1,0 +1,61 @@
+This is the Raspberry Pi setup needed to run the programs!
+
+You'll need:
+
+ - OLED
+ - LED with buttons
+ - 3 LEDS (Red, Yellow, Green)
+ - 3 resistors
+ - 3 buttons
+ - Breadboard
+ - Approx 12 female / female wires
+ - Approx 7 male / male wires
+ - Approx 7 male / female wires
+
+
+Picture of setup: 
+
+https://ibb.co/yqTx6RS (breadboard)
+https://ibb.co/hsQDkFY (rpi wires)
+
+Now for the GPIO setup:
+
+Breadboard:
+
+led_yes = GPIO 21
+led_enter = GPIO 16
+led_no = GPIO 1
+button_yes = GPIO 20
+button_enter = GPIO 12
+button_no = GPIO 7
+Ground = Ground
+
+LED with buttons:
+
+STB = GPIO 14
+CLK = GPIO 15
+DIO = GPIO 18
+UCC = 3.3V
+GND = Ground
+
+OLED:
+
+GND = Ground
+VDD = 3.3V
+SCK = GPIO 11
+SDA = GPIO 10
+RES = GPIO 4
+DC = GPIO 6
+CS = GPIO 5
+
+
+Libraries you'll need installed:
+
+- paho.mqtt.client
+- rpi_TM1638
+- board
+- digitalio
+- PIL
+- adafruit_ssd1306
+- gpiozero
+
