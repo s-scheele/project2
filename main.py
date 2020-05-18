@@ -11,7 +11,6 @@ from gpiozero import LED, Button
 
 #Setup our GPIO pins
 #LED and Buttons on breadboard:
-
 led_yes = LED(21)
 led_enter = LED(16)
 led_no = LED(1)
@@ -347,24 +346,57 @@ def mqtt_receive_workout():
 
     client.loop_forever()
 
+def choose_mode():
+    mode = 0
+    while True:
+        if button_yes.is_pressed:
+            mode = 1
+            break
+        if button_no.is_pressed:
+            mode = 2
+            break
+    return mode 
 
 def main():
-    button_enter.wait_for_press()
-    mqtt_write("enter")
-    mqtt_receive_workout()
-    while True:
-        countdown()
-        workout_countdown()
-        another_status = 1
-        while another_status == 1:
-            if button_yes.is_pressed:
-                mqtt_write("yes")
-                another_status = 0
-            if button_no.is_pressed:
-                mqtt_write("no")
-                oled_write("You lose!")
-                exit()
+    mode = choose_mode()
+    if mode == 1:
+        button_enter.wait_for_press()
+        mqtt_write("enter")
+        mqtt_receive_workout()
+        while True:
+            countdown()
+            workout_countdown()
+            another_status = 1
+            while another_status == 1:
+                if button_yes.is_pressed:
+                    mqtt_write("yes")
+                    another_status = 0
+                if button_no.is_pressed:
+                    mqtt_write("no")
+                    oled_write("You lose!")
+                    exit()
+            mqtt_receive_accept()
+    if mode == 2:
+        mqtt_receive_start()
+        output = button_led_update()
+        oled_write(output)
+        mqtt_write(output)
         mqtt_receive_accept()
+        while True:
+            countdown()
+            workout_countdown()
+            mqtt_receive_accept()
+            another_status = 1
+            while another_status == 1:
+                if button_yes.is_pressed:
+                    mqtt_write("yes")
+                    another_status = 0
+                    led_yes.off()
+                if button_no.is_pressed:
+                    mqtt_write("no")
+                    oled_write("You lose!")
+                    exit()
+
 
 main()
 

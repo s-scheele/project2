@@ -24,7 +24,17 @@ Green button = "yes"
 
 INSTRUCTIONS:
 
-main_player1.py:
+When main.py is launched, you have to indicate if you wish to play as:
+
+Player 1: The initiator. Click the yes button for this mode.
+
+OR
+
+Player 2: The receiver. Click the no button for this mode.
+
+
+
+Player 1:
 This is the "Initiator". 
 
 You run the .py file, and when you are ready to initiate a workout, 
@@ -54,7 +64,7 @@ complete their set.
 
 ------------------------
 
-main_player2.py
+Player 2:
 This is the "Receiver".
 
 You run the .py file, and wait for someone running player1, to initiate.
