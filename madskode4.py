@@ -140,21 +140,26 @@ def get_result(their_score, my_score):
     message = "Opponent got "
     message += str(their_score)
     message += " sets"
-    client.publish("f20v", message, qos = 0, retain = False)
+    client.publish("f20v/Player1", message, qos = 0, retain = False)
+    client.publish("f20v/Player2", message, qos = 0, retain = False)
 
     message = "You got "
     message += str(my_score)
     message += " sets"
-    client.publish("f20v", message, qos = 0, retain = False)
+    client.publish("f20v/Player1", message, qos = 0, retain = False)
+    client.publish("f20v/Player2", message, qos = 0, retain = False)
 
     if (my_score > their_score):
-        client.publish("f20v", "YOU WIN", qos = 0, retain = False)
+        client.publish("f20v/Player1", "YOU WIN", qos = 0, retain = False)
+        client.publish("f20v/Player2", "YOU WIN", qos = 0, retain = False)
 
     elif (my_score == their_score):
-        client.publish("f20v", "Draw -_-", qos = 0, retain = False)
+        client.publish("f20v/Player1", "Draw -_-", qos = 0, retain = False)
+        client.publish("f20v/Player2", "YOU WIN", qos = 0, retain = False)
 
     else:
-        client.publish("f20v", "YOU LOSE :(", qos = 0, retain = False)
+        client.publish("f20v/Player1", "YOU LOSE :(", qos = 0, retain = False)
+        client.publish("f20v/Player2", "YOU WIN", qos = 0, retain = False)
 
 #   player = "f20v/Player2"
 
