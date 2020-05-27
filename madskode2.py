@@ -122,21 +122,21 @@ def get_result(their_score, my_score):
 	message = "Opponent got "
 	message += str(their_score)
 	message += " sets"
-	print_to_led(message)
+	print_to_oled(message)
 
 	message = "You got "
 	message += str(my_score)
 	message += " sets"
-	print_to_led(message)
+	print_to_oled(message)
 
 	if (my_score > their_score):
-		print_to_led("YOU WIN")
+		print_to_oled("YOU WIN")
 
 	elif (my_score == their_score):
-		print_to_led("DRAW")
+		print_to_oled("DRAW")
 
 	else:
-		print_to_led("YOU LOSE")
+		print_to_oled("YOU LOSE")
 
 #	player = "f20v/Player2"
 
@@ -292,7 +292,7 @@ def print_to_oled(msg):
 
 	# This if statement will print out scrolling text when both players have finished their workout
 	if (count == 3):
-		text = msg.payload
+		text = msg
 		(font_width, font_height) = font.getsize(text)
 
 		for n in range(128, -130, -1):
