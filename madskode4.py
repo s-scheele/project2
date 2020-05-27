@@ -31,7 +31,8 @@ def press():
     if (count > 2):
         count = 0
     sleep(0.2)
-    client.publish("f20v", "Workout?", qos = 0, retain = False)
+    client.publish("f20v/Player1", "Workout?", qos = 0, retain = False)
+    client.publish("f20v/Player2", "Workout?", qos = 0, retain = False)
     client.disconnect()
     client = mqtt.Client()
     client.on_connect_player1 = on_connect
@@ -47,7 +48,8 @@ def accept():
     sleep(0.2)
     if (count > 2):
         count = 0
-    client.publish("f20v", "Yes", qos = 0, retain = False)
+    client.publish("f20v/Player1", "Yes", qos = 0, retain = False)
+    client.publish("f20v/Player2", "Yes", qos = 0, retain = False)
     client.disconnect()
     client = mqtt.Client()
     client.on_connect_player2 = on_connect
@@ -58,7 +60,8 @@ def accept():
 
 # Function for the no button
 def decline():
-    client.publish("f20v", "No", qos = 0, retain = False)
+    client.publish("f20v/Player1", "No", qos = 0, retain = False)
+    client.publish("f20v/Player2", "No", qos = 0, retain = False)
 
 
 # Subscribes to 5 different topics
@@ -75,7 +78,8 @@ def on_connect_player2(client, userdata, flags, rc):
 
 # Publishes the number of reps to do for the given workout
 def show_reps():
-    client.publish("f20v", workouts[key], qos = 0, retain = False)
+    client.publish("f20v/Player1", workouts[key], qos = 0, retain = False)
+    client.publish("f20v/Player2", workouts[key], qos = 0, retain = False)
 
 
 
